@@ -69,6 +69,12 @@
 		68DD4B68194784A70077ED24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65920A7616D73F8700D89A4B /* CoreGraphics.framework */; };
 		68E978CF1C17724400EAD971 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E978CE1C17724400EAD971 /* LaunchScreen.storyboard */; };
 		68E978D11C1772D200EAD971 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68E978D01C1772D200EAD971 /* background.png */; };
+		68F02B2D1F868BB4007AB364 /* AWSKinesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2A1F868BB4007AB364 /* AWSKinesis.framework */; };
+		68F02B2E1F868BB4007AB364 /* AWSKinesis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2A1F868BB4007AB364 /* AWSKinesis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68F02B2F1F868BB4007AB364 /* Affdex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2B1F868BB4007AB364 /* Affdex.framework */; };
+		68F02B301F868BB4007AB364 /* Affdex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2B1F868BB4007AB364 /* Affdex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68F02B311F868BB4007AB364 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2C1F868BB4007AB364 /* AWSCore.framework */; };
+		68F02B321F868BB4007AB364 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68F02B2C1F868BB4007AB364 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68F4233218CD216D0032A50D /* ExpressionView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F4233018CD216D0032A50D /* ExpressionView_iPad.xib */; };
 		68F4233318CD216D0032A50D /* ExpressionView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F4233118CD216D0032A50D /* ExpressionView_iPhone.xib */; };
 		68F626B81B909F2C004521CE /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F626B71B909F2C004521CE /* SoundEffect.m */; };
@@ -85,6 +91,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				68F02B301F868BB4007AB364 /* Affdex.framework in Embed Frameworks */,
+				68F02B2E1F868BB4007AB364 /* AWSKinesis.framework in Embed Frameworks */,
+				68F02B321F868BB4007AB364 /* AWSCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +175,9 @@
 		68DCE53C1767642C000DE093 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		68E978CE1C17724400EAD971 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68E978D01C1772D200EAD971 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		68F02B2A1F868BB4007AB364 /* AWSKinesis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSKinesis.framework; path = Carthage/Build/iOS/AWSKinesis.framework; sourceTree = "<group>"; };
+		68F02B2B1F868BB4007AB364 /* Affdex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Affdex.framework; path = Carthage/Build/iOS/Affdex.framework; sourceTree = "<group>"; };
+		68F02B2C1F868BB4007AB364 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = Carthage/Build/iOS/AWSCore.framework; sourceTree = "<group>"; };
 		68F4233018CD216D0032A50D /* ExpressionView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpressionView_iPad.xib; sourceTree = "<group>"; };
 		68F4233118CD216D0032A50D /* ExpressionView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpressionView_iPhone.xib; sourceTree = "<group>"; };
 		68F626B61B909F2C004521CE /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
@@ -183,8 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68FA744C1B8E1659004045F3 /* MediaPlayer.framework in Frameworks */,
+				68F02B311F868BB4007AB364 /* AWSCore.framework in Frameworks */,
 				68DD4B68194784A70077ED24 /* CoreGraphics.framework in Frameworks */,
 				689DB56217DA32BD00751050 /* SystemConfiguration.framework in Frameworks */,
+				68F02B2D1F868BB4007AB364 /* AWSKinesis.framework in Frameworks */,
+				68F02B2F1F868BB4007AB364 /* Affdex.framework in Frameworks */,
 				689DB56017DA329E00751050 /* CFNetwork.framework in Frameworks */,
 				689DB55E17DA2CAA00751050 /* Security.framework in Frameworks */,
 				68DCE53D1767642C000DE093 /* AudioToolbox.framework in Frameworks */,
@@ -229,6 +244,9 @@
 		65920A6616D73F8700D89A4B = {
 			isa = PBXGroup;
 			children = (
+				68F02B2B1F868BB4007AB364 /* Affdex.framework */,
+				68F02B2C1F868BB4007AB364 /* AWSCore.framework */,
+				68F02B2A1F868BB4007AB364 /* AWSKinesis.framework */,
 				68F69CCF1A7FEC37001A7DAB /* Settings.bundle */,
 				68914FF11A9102CC00A6C4D7 /* Images.xcassets */,
 				686C75BE1B95EAC000483C1A /* media */,
