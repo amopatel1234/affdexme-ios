@@ -1,0 +1,2 @@
+binary "https://affdex-sdk-dist.s3.amazonaws.com/apple/ios/AffdexSDK.json" ~> 4.0
+github "aws/aws-sdk-ios"

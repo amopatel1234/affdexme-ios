@@ -75,7 +75,6 @@
 		68F626BD1B91E502004521CE /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F626BC1B91E502004521CE /* HeaderCollectionReusableView.m */; };
 		68F69CD01A7FEC37001A7DAB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68F69CCF1A7FEC37001A7DAB /* Settings.bundle */; };
 		68FA744C1B8E1659004045F3 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA744B1B8E1659004045F3 /* MediaPlayer.framework */; };
-		80C1FA373E7B06E146080315 /* Pods_AffdexMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6499AFBE99C1FAFEF316AE7F /* Pods_AffdexMe.framework */; };
 		D9111B001E60EAC300E8467B /* Affectiva_Logo_Clear_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = D9111AFF1E60EAC300E8467B /* Affectiva_Logo_Clear_Background.png */; };
 /* End PBXBuildFile section */
 
@@ -93,8 +92,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08A8DA8F2A6FC7B5834E0252 /* Pods-AffdexMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AffdexMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-AffdexMe/Pods-AffdexMe.release.xcconfig"; sourceTree = "<group>"; };
-		6499AFBE99C1FAFEF316AE7F /* Pods_AffdexMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AffdexMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		659140EF1727E23500DB4E10 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		659140F01727E23500DB4E10 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		659140F11727E23500DB4E10 /* AffdexDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffdexDemoViewController.h; sourceTree = "<group>"; };
@@ -178,7 +175,6 @@
 		68F69CCF1A7FEC37001A7DAB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		68FA744B1B8E1659004045F3 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		D9111AFF1E60EAC300E8467B /* Affectiva_Logo_Clear_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Affectiva_Logo_Clear_Background.png; sourceTree = SOURCE_ROOT; };
-		F300705025A4FC32857AB7CC /* Pods-AffdexMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AffdexMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AffdexMe/Pods-AffdexMe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +195,6 @@
 				65920A9816D7414700D89A4B /* CoreImage.framework in Frameworks */,
 				65920A7316D73F8700D89A4B /* UIKit.framework in Frameworks */,
 				65920A7516D73F8700D89A4B /* Foundation.framework in Frameworks */,
-				80C1FA373E7B06E146080315 /* Pods_AffdexMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +238,6 @@
 				659140EE1727E23500DB4E10 /* Classes */,
 				65920A7116D73F8700D89A4B /* Frameworks */,
 				65920A7016D73F8700D89A4B /* Products */,
-				EB810181604A1D4A0E630218 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,7 +267,6 @@
 				65920A7616D73F8700D89A4B /* CoreGraphics.framework */,
 				68914F7F1A8FED6600A6C4D7 /* PhotosUI.framework */,
 				68914F811A8FED6600A6C4D7 /* Photos.framework */,
-				6499AFBE99C1FAFEF316AE7F /* Pods_AffdexMe.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -362,15 +355,6 @@
 			path = videos;
 			sourceTree = "<group>";
 		};
-		EB810181604A1D4A0E630218 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F300705025A4FC32857AB7CC /* Pods-AffdexMe.debug.xcconfig */,
-				08A8DA8F2A6FC7B5834E0252 /* Pods-AffdexMe.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -378,14 +362,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65920A9216D73F8700D89A4B /* Build configuration list for PBXNativeTarget "AffdexMe" */;
 			buildPhases = (
-				FB998553601E55418A8B1DF8 /* [CP] Check Pods Manifest.lock */,
 				65920A6B16D73F8700D89A4B /* Sources */,
 				65920A6C16D73F8700D89A4B /* Frameworks */,
 				65920A6D16D73F8700D89A4B /* Resources */,
 				68914F3B1A8F8F9500A6C4D7 /* Embed Frameworks */,
 				68F198BA18B642BF00621FBA /* ShellScript */,
-				75D7BAE34DE953E06CAAC60D /* [CP] Embed Pods Frameworks */,
-				D71A37B6153BEFD7F93B156C /* [CP] Copy Pods Resources */,
+				68F55D171F85D0D0001D2845 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -407,7 +389,7 @@
 				TargetAttributes = {
 					65920A6E16D73F8700D89A4B = {
 						DevelopmentTeam = AG6NAZTNM9;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -501,50 +483,18 @@
 			shellPath = /bin/sh;
 			shellScript = "set -x\nbuildPlist=${INFOPLIST_FILE}\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$buildPlist\")\nCFBundleVersionINCR=$((CFBundleVersion + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionINCR\" \"$buildPlist\"\n";
 		};
-		75D7BAE34DE953E06CAAC60D /* [CP] Embed Pods Frameworks */ = {
+		68F55D171F85D0D0001D2845 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AffdexMe/Pods-AffdexMe-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D71A37B6153BEFD7F93B156C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AffdexMe/Pods-AffdexMe-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB998553601E55418A8B1DF8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -646,7 +596,6 @@
 		};
 		65920A9316D73F8700D89A4B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F300705025A4FC32857AB7CC /* Pods-AffdexMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BITCODE_GENERATION_MODE = bitcode;
@@ -654,9 +603,13 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AG6NAZTNM9;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AffdexMe-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -664,15 +617,15 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "AffdexMe-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = /private/tmp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.affectiva.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AffdexMe;
-				PROVISIONING_PROFILE = "698906bd-cc0c-4cc6-bdf4-ddd8be18899d";
-				PROVISIONING_PROFILE_SPECIFIER = "Affectiva Dev Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "$(WORKSPACE)/build";
+				SYMROOT = "$(SRCROOT)/build";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -680,33 +633,36 @@
 		};
 		65920A9416D73F8700D89A4B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08A8DA8F2A6FC7B5834E0252 /* Pods-AffdexMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = AG6NAZTNM9;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AffdexMe-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "AffdexMe-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = /private/tmp;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.affectiva.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AffdexMe;
-				PROVISIONING_PROFILE = "a4966440-4664-4329-bac2-e02f76259238";
-				PROVISIONING_PROFILE_SPECIFIER = "XC: com.affectiva.AffdexMe";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "$(WORKSPACE)/build";
+				SYMROOT = "$(SRCROOT)/build";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
