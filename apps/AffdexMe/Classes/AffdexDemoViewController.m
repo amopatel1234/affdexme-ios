@@ -45,19 +45,19 @@
 
     // check if UIGraphicsBeginImageContextWithOptions is available (iOS is 4.0+)
     UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
-    
+
     // optional: add a shadow, to avoid clipping the shadow you should make the context size bigger
     //
     // CGContextRef ctx = UIGraphicsGetCurrentContext();
     // CGContextSetShadowWithColor(ctx, CGSizeMake(1.0, 1.0), 5.0, [[UIColor grayColor] CGColor]);
-    
+
     // draw in context, you can use also drawInRect:withFont:
     [text drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{ NSFontAttributeName : font }];
-    
+
     // transfer image
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return image;
 }
 
@@ -157,7 +157,7 @@
 - (void)enterSingleFaceMode;
 {
     self.multifaceMode = FALSE;
-    
+
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.5];
     self.classifierHeaderView_compact.alpha = 1.0;
@@ -168,7 +168,7 @@
 - (void)enterMultiFaceMode;
 {
     self.multifaceMode = TRUE;
-    
+
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.5];
     self.classifierHeaderView_compact.alpha = 0.0;
@@ -187,22 +187,22 @@
         // single face mode
         [self enterSingleFaceMode];
     }
-    
+
     NSDate *now = [NSDate date];
-    
+
     if (nil != self.dateOfLastProcessedFrame)
     {
         NSTimeInterval interval = [now timeIntervalSinceDate:self.dateOfLastProcessedFrame];
-        
+
         if (interval > 0)
         {
             float fps = 1.0 / interval;
             self.fpsProcessed.text = [NSString stringWithFormat:@"FPS(P): %.1f", fps];
         }
     }
-    
+
     self.dateOfLastProcessedFrame = now;
-    
+
     // set up arrays of points and rects
     self.facePointsToDraw = [NSMutableArray new];
     self.faceRectsToDraw = [NSMutableArray new];
@@ -273,11 +273,6 @@
 
 - (void)unprocessedImageReady:(AFDXDetector *)detector image:(UIImage *)image atTime:(NSTimeInterval)time;
 {
-    static int skip = 0;
-    if (skip++ % 5 != 0) {
-//        return;
-    }
-    
     __block AffdexDemoViewController *weakSelf = self;
     __block UIImage *newImage = image;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -307,7 +302,9 @@
             // create array of images and rects to do all drawing at once
             NSMutableArray *imagesArray = [NSMutableArray array];
             NSMutableArray *rectsArray = [NSMutableArray array];
-            
+
+            CGRect faceBounds = face.faceBounds;
+
             // add dominant emoji
             if (weakSelf.drawEmojis) {
                 Emoji dominantEmoji = [[face.userInfo objectForKey:@"dominantEmoji"] intValue];
@@ -321,11 +318,11 @@
                                 // resize bounds to be relative in size to bounding box
                                 CGSize size = emojiImage.size;
                                 CGFloat aspectRatio = size.height / size.width;
-                                size.width = face.faceBounds.size.height * .33;
+                                size.width = faceBounds.size.height * .25;
                                 size.height = size.width * aspectRatio;
-                                
-                                CGRect rect = CGRectMake(face.faceBounds.origin.x - size.width,
-                                                         face.faceBounds.origin.y,
+
+                                CGRect rect = CGRectMake(faceBounds.origin.x - (size.width/2),
+                                                         faceBounds.origin.y,
                                                          size.width,
                                                          size.height);
                                 [imagesArray addObject:emojiImage];
@@ -343,10 +340,10 @@
                     // resize bounds to be relative in size to bounding box
                     CGSize size = genderImage.size;
                     CGFloat aspectRatio = size.height / size.width;
-                    size.width = face.faceBounds.size.height * .33;
+                    size.width = faceBounds.size.height * .25;
                     size.height = size.width * aspectRatio;
-                    
-                    CGRect rect = CGRectMake(face.faceBounds.origin.x - size.width, face.faceBounds.origin.y + (face.faceBounds.size.height) - size.height, size.width, size.height);
+
+                    CGRect rect = CGRectMake(faceBounds.origin.x - (size.width/2), faceBounds.origin.y + (faceBounds.size.height) - size.height, size.width, size.height);
                     [imagesArray addObject:genderImage];
                     [rectsArray addObject:[NSValue valueWithCGRect:rect]];
                 }
@@ -355,7 +352,7 @@
                 if (self.multifaceMode == TRUE) {
                     CGFloat dominantScore = -9999;
                     NSString *dominantName = @"NONAME";
-                 
+
                     for (NSDictionary *d in self.emotions) {
                         NSString *name = [d objectForKey:@"name"];
                         CGFloat score = [[face valueForKeyPath:[d objectForKey:@"score"]] floatValue];
@@ -368,7 +365,7 @@
                             dominantName = name;
                         }
                     }
-                        
+
 #if FIND_MAX_EXPRESSION
                     // pass through expressions to find the dominant one
                     for (NSDictionary *d in self.expressions) {
@@ -389,19 +386,19 @@
                         [self.dominantEmotionOrExpression setMetric:dominantScore];
                         self.dominantEmotionOrExpression.expressionLabel.text = dominantName;
                         // resize bounds to be relative in size to bounding box
-                        
+
                         CGSize size = self.dominantEmotionOrExpression.view.bounds.size;
                         CGFloat aspectRatio = size.height / size.width;
-                        size.width = face.faceBounds.size.width * 1.0;
+                        size.width = faceBounds.size.width * 1.0;
                         size.height = size.width * aspectRatio;
                         UIImage *image = [UIImage imageFromView:self.dominantEmotionOrExpression.view];
                         if (self.cameraToUse == AFDX_CAMERA_FRONT) {
                             image = [UIImage imageWithCGImage:image.CGImage
-                                                                        scale:image.scale
-                                                                  orientation:UIImageOrientationUpMirrored];
+                                                        scale:image.scale
+                                                  orientation:UIImageOrientationUpMirrored];
                         }
-                        CGRect rect = CGRectMake(face.faceBounds.origin.x + (face.faceBounds.size.width / 2) - size.width / 2,
-                                                 face.faceBounds.origin.y + face.faceBounds.size.height,
+                        CGRect rect = CGRectMake(faceBounds.origin.x + (faceBounds.size.width / 2) - size.width / 2,
+                                                 faceBounds.origin.y + faceBounds.size.height,
                                                  size.width,
                                                  size.height);
                         [imagesArray addObject:image];
@@ -411,16 +408,16 @@
                     }
                 }
             }
-            
+
             // do drawing here
             newImage = [AFDXDetector imageByDrawingPoints:weakSelf.drawFacePoints ? weakSelf.facePointsToDraw : nil
-                                        andRectangles:weakSelf.drawFaceRect ? weakSelf.faceRectsToDraw : nil
-                                            andImages:imagesArray
-                                           withRadius:1.4
-                                      usingPointColor:[UIColor whiteColor]
-                                  usingRectangleColor:[UIColor whiteColor]
-                                      usingImageRects:rectsArray
-                                              onImage:newImage];
+                                            andRectangles:weakSelf.drawFaceRect ? weakSelf.faceRectsToDraw : nil
+                                                andImages:imagesArray
+                                               withRadius:1.4
+                                          usingPointColor:[UIColor whiteColor]
+                                      usingRectangleColor:[UIColor whiteColor]
+                                          usingImageRects:rectsArray
+                                                  onImage:newImage];
         }
 
         // flip image if the front camera is being used so that the perspective is mirrored.
@@ -437,21 +434,21 @@
         }
 
     });
-    
+
 #ifdef DEMO_MODE
     static NSTimeInterval last = 0;
     const CGFloat timeConstant = 0.0000001;
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:(time - last) * timeConstant]];
     last = time;
 #endif
-    
+
     // compute frames per second and show
     NSDate *now = [NSDate date];
-    
+
     if (nil != weakSelf.dateOfLastFrame)
     {
         NSTimeInterval interval = [now timeIntervalSinceDate:weakSelf.dateOfLastFrame];
-        
+
         if (interval > 0)
         {
             float fps = 1.0 / interval;
@@ -460,7 +457,7 @@
             });
         }
     }
-    
+
     weakSelf.dateOfLastFrame = now;
 }
 
@@ -480,34 +477,34 @@
 {
     __block AffdexDemoViewController *weakSelf = self;
 
- dispatch_async(dispatch_get_main_queue(), ^{
-     /*
-        BOOL iPhone = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone);
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.5];
-        
-        if (iPhone == TRUE)
-        {
-            weakSelf.classifier1View_compact.alpha = 1.0;
-            weakSelf.classifier2View_compact.alpha = 1.0;
-            weakSelf.classifier3View_compact.alpha = 1.0;
-            weakSelf.classifier4View_compact.alpha = 1.0;
-            weakSelf.classifier5View_compact.alpha = 1.0;
-            weakSelf.classifier6View_compact.alpha = 1.0;
-        }
-        else
-        {
-            weakSelf.classifier1View_regular.alpha = 1.0;
-            weakSelf.classifier2View_regular.alpha = 1.0;
-            weakSelf.classifier3View_regular.alpha = 1.0;
-            weakSelf.classifier4View_regular.alpha = 1.0;
-            weakSelf.classifier5View_regular.alpha = 1.0;
-            weakSelf.classifier6View_regular.alpha = 1.0;
-        }
-        
-        [UIView commitAnimations];
-        */
+    dispatch_async(dispatch_get_main_queue(), ^{
+        /*
+         BOOL iPhone = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone);
+
+         [UIView beginAnimations:nil context:NULL];
+         [UIView setAnimationDuration:0.5];
+
+         if (iPhone == TRUE)
+         {
+         weakSelf.classifier1View_compact.alpha = 1.0;
+         weakSelf.classifier2View_compact.alpha = 1.0;
+         weakSelf.classifier3View_compact.alpha = 1.0;
+         weakSelf.classifier4View_compact.alpha = 1.0;
+         weakSelf.classifier5View_compact.alpha = 1.0;
+         weakSelf.classifier6View_compact.alpha = 1.0;
+         }
+         else
+         {
+         weakSelf.classifier1View_regular.alpha = 1.0;
+         weakSelf.classifier2View_regular.alpha = 1.0;
+         weakSelf.classifier3View_regular.alpha = 1.0;
+         weakSelf.classifier4View_regular.alpha = 1.0;
+         weakSelf.classifier5View_regular.alpha = 1.0;
+         weakSelf.classifier6View_regular.alpha = 1.0;
+         }
+
+         [UIView commitAnimations];
+         */
         if ((weakSelf.expressionViewControllers_compact != nil) && (weakSelf.expressionViewControllers_regular != nil))
         {
             face.userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -529,7 +526,7 @@
 
 - (void)detector:(AFDXDetector *)detector didStopDetectingFace:(AFDXFace *)face;
 {
-//    __block AffdexDemoViewController *weakSelf = self;
+    //    __block AffdexDemoViewController *weakSelf = self;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         for (ExpressionViewController *vc in self.expressionViewControllers_compact)
@@ -543,10 +540,10 @@
 
 #if 0
         BOOL iPhone = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone);
-        
+
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.5];
-        
+
         if (iPhone == TRUE)
         {
             weakSelf.classifier1View_compact.alpha = 0.0;
@@ -565,7 +562,7 @@
             weakSelf.classifier5View_regular.alpha = 0.0;
             weakSelf.classifier6View_regular.alpha = 0.0;
         }
-        
+
         [UIView commitAnimations];
 #endif
         face.userInfo = nil;
@@ -637,6 +634,7 @@
 + (void)initialize;
 {
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"drawFacePoints" : [NSNumber numberWithBool:YES]}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"drawFaceRect" : [NSNumber numberWithBool:YES]}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"drawAppearanceIcons" : [NSNumber numberWithBool:YES]}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"drawEmojis" : [NSNumber numberWithBool:YES]}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"allowMultiface" : [NSNumber numberWithBool:NO]}];
@@ -720,7 +718,7 @@
                             @"image": [UIImage imageNamed:@"Valence.jpg"]
                             }
                           ];
-        
+
         self.expressions = @[@{@"name" : @"Attention",
                                @"propertyName" : @"attention",
                                @"score": @"attentionScore",
@@ -796,8 +794,8 @@
                                @"score": @"upperLipRaiseScore",
                                @"image": [UIImage imageNamed:@"Upper Lip Raise.jpg"]
                                }
-                          ];
-        
+                             ];
+
         CGFloat emojiFontSize = 80.0;
 
         self.emojis = @[@{@"name" : @"Laughing",
@@ -861,9 +859,9 @@
                           @"code": [NSNumber numberWithInt:AFDX_EMOJI_SMIRK]
                           }
                         ];
-        
+
         self.availableClassifiers = @[self.emotions, self.expressions];
-        
+
         self.selectedClassifiers = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedClassifiers"] mutableCopy];
         if (self.selectedClassifiers == nil)
         {
@@ -877,35 +875,35 @@
 - (void)viewDidLoad;
 {
     [super viewDidLoad];
-    
+
     self.cameraToUse = AFDX_CAMERA_FRONT;
-    
+
     CGFloat scaleFactor = 1.0;
     BOOL compactWidth = [self traitCollection].horizontalSizeClass == UIUserInterfaceSizeClassCompact;
     if (compactWidth == TRUE) {
         scaleFactor *= 1.0;
     }
-    
+
     self.maleImage = [UIImage imageNamed:@"male-noglasses.png"];
     self.maleImage = [UIImage imageWithCGImage:[self.maleImage CGImage]
-                        scale:(self.maleImage.scale * scaleFactor)
-                  orientation:(self.maleImage.imageOrientation)];
+                                         scale:(self.maleImage.scale * scaleFactor)
+                                   orientation:(self.maleImage.imageOrientation)];
     self.femaleImage = [UIImage imageNamed:@"female-noglasses.png"];
     self.femaleImage = [UIImage imageWithCGImage:[self.femaleImage CGImage]
-                                         scale:(self.femaleImage.scale * scaleFactor)
-                                   orientation:(self.femaleImage.imageOrientation)];
+                                           scale:(self.femaleImage.scale * scaleFactor)
+                                     orientation:(self.femaleImage.imageOrientation)];
     self.maleImageWithGlasses = [UIImage imageNamed:@"male-glasses.png"];
     self.maleImageWithGlasses = [UIImage imageWithCGImage:[self.maleImageWithGlasses CGImage]
-                                         scale:(self.maleImageWithGlasses.scale * scaleFactor)
-                                   orientation:(self.maleImageWithGlasses.imageOrientation)];
+                                                    scale:(self.maleImageWithGlasses.scale * scaleFactor)
+                                              orientation:(self.maleImageWithGlasses.imageOrientation)];
     self.femaleImageWithGlasses = [UIImage imageNamed:@"female-glasses.png"];
     self.femaleImageWithGlasses = [UIImage imageWithCGImage:[self.femaleImageWithGlasses CGImage]
-                                                    scale:(self.femaleImageWithGlasses.scale * scaleFactor)
-                                              orientation:(self.femaleImageWithGlasses.imageOrientation)];
+                                                      scale:(self.femaleImageWithGlasses.scale * scaleFactor)
+                                                orientation:(self.femaleImageWithGlasses.imageOrientation)];
     self.unknownImage = [UIImage imageNamed:@"unknown-noglasses.png"];
     self.unknownImage = [UIImage imageWithCGImage:[self.unknownImage CGImage]
-                                                       scale:(self.unknownImage.scale * scaleFactor)
-                                                 orientation:(self.unknownImage.imageOrientation)];
+                                            scale:(self.unknownImage.scale * scaleFactor)
+                                      orientation:(self.unknownImage.imageOrientation)];
     self.unknownImageWithGlasses = [UIImage imageNamed:@"unknown-glasses.png"];
     self.unknownImageWithGlasses = [UIImage imageWithCGImage:[self.unknownImageWithGlasses CGImage]
                                                        scale:(self.unknownImageWithGlasses.scale * scaleFactor)
@@ -914,19 +912,19 @@
     // The classifier views are all defined as separate IBOutlets.
     // Populate into arrays so we can iterate through them.
     self.classifierViews_compact = [NSMutableArray arrayWithObjects:self.classifier1View_compact,
-                                                                    self.classifier2View_compact,
-                                                                    self.classifier3View_compact,
-                                                                    self.classifier4View_compact,
-                                                                    self.classifier5View_compact,
-                                                                    self.classifier6View_compact,
-                                                                    nil];
+                                    self.classifier2View_compact,
+                                    self.classifier3View_compact,
+                                    self.classifier4View_compact,
+                                    self.classifier5View_compact,
+                                    self.classifier6View_compact,
+                                    nil];
     self.classifierViews_regular = [NSMutableArray arrayWithObjects:self.classifier1View_regular,
-                                                                    self.classifier2View_regular,
-                                                                    self.classifier3View_regular,
-                                                                    self.classifier4View_regular,
-                                                                    self.classifier5View_regular,
-                                                                    self.classifier6View_regular,
-                                                                    nil];
+                                    self.classifier2View_regular,
+                                    self.classifier3View_regular,
+                                    self.classifier4View_regular,
+                                    self.classifier5View_regular,
+                                    self.classifier6View_regular,
+                                    nil];
 
     // Version number.
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
@@ -949,9 +947,9 @@
 - (void)viewWillDisappear:(BOOL)animated;
 {
     [self resignFirstResponder];
-    
+
     [super viewWillDisappear:animated];
-    
+
     [self stopDetector];
 
     for (ExpressionViewController *vc in self.expressionViewControllers_compact)
@@ -984,7 +982,7 @@
     [self.imageView setImage:nil];
 
     [super viewWillAppear:animated];
-    
+
     // setup views
 
     // create the expression view controllers to hold the expressions for this face
@@ -1029,7 +1027,7 @@
     }
 
     [[NSUserDefaults standardUserDefaults] setObject:self.selectedClassifiers forKey:@"selectedClassifiers"];
-    
+
     [self enterSingleFaceMode];
 }
 
@@ -1040,7 +1038,7 @@
         self.versionLabel_compact.hidden = !self.versionLabel_compact.hidden;
         self.versionLabel_regular.hidden = !self.versionLabel_regular.hidden;
     }
-    
+
     [super motionEnded:motion withEvent:event];
 }
 
@@ -1051,8 +1049,8 @@
 
 #ifdef DEMO_MODE
     self.mediaFilename = [[NSBundle mainBundle] pathForResource:@"face1" ofType:@"m4v"];
-//    self.mediaFilename = [[NSBundle mainBundle] pathForResource:@"faces_in_out" ofType:@"mp4"];
-    
+    //    self.mediaFilename = [[NSBundle mainBundle] pathForResource:@"faces_in_out" ofType:@"mp4"];
+
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.mediaFilename] == YES)
     {
         [self startDetector];
@@ -1064,11 +1062,7 @@
         [self startDetector];
     } else if(status == AVAuthorizationStatusDenied){
         // denied
-        [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                    message:@"AffdexMe doesn't have permission to use camera, please change privacy settings"
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        [self showAlertWithTitle:@"Error!" message:@"AffdexMe doesn't have permission to use camera, please change privacy settings"];
     } else if(status == AVAuthorizationStatusRestricted){
         // restricted
     } else if(status == AVAuthorizationStatusNotDetermined){
@@ -1077,15 +1071,18 @@
             if(granted){
                 [self startDetector];
             } else {
-                [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                            message:@"AffdexMe doesn't have permission to use camera, please change privacy settings"
-                                           delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
+                [self showAlertWithTitle:@"Error!" message:@"AffdexMe doesn't have permission to use camera, please change privacy settings"];
             }
         }];
     }
 #endif
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:dismiss];
+    [self showViewController:alert sender:nil];
 }
 
 - (void)stopDetector;
@@ -1096,7 +1093,7 @@
 - (void)startDetector;
 {
     [self.detector stop];
-    
+
     NSUInteger maximumFaces = 1;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"allowMultiface"] boolValue] == YES) {
         maximumFaces = 3;
@@ -1111,25 +1108,25 @@
     [self.detector enableAnalytics];
 
     self.drawFacePoints = [[[NSUserDefaults standardUserDefaults] objectForKey:@"drawFacePoints"] boolValue];
-    self.drawFaceRect = self.drawFacePoints;
+    self.drawFaceRect = [[[NSUserDefaults standardUserDefaults] objectForKey:@"drawFaceRect"] boolValue];//self.drawFacePoints;
     self.drawAppearanceIcons = [[[NSUserDefaults standardUserDefaults] objectForKey:@"drawAppearanceIcons"] boolValue];
     self.drawEmojis = [[[NSUserDefaults standardUserDefaults] objectForKey:@"drawEmojis"] boolValue];
-    
+
     NSInteger maxProcessRate = [[[NSUserDefaults standardUserDefaults] objectForKey:@"maxProcessRate"] integerValue];
     if (0 == maxProcessRate)
     {
         maxProcessRate = 5;
     }
-    
+
     if ([[[UIDeviceHardware new] platformString] isEqualToString:@"iPhone 4S"])
     {
         maxProcessRate = 4;
     }
-    
+
     self.detector.maxProcessRate = maxProcessRate;
     self.dateOfLastFrame = nil;
     self.dateOfLastProcessedFrame = nil;
-    
+
     // tell the detector which facial expressions we want to measure
 #define ENABLE_ALL_CLASSIFIERS    0  // 1 to enable all classifiers, 0 for minimum set
 #if ENABLE_ALL_CLASSIFIERS  // Enable everything for firehose testing
@@ -1163,19 +1160,17 @@
             }
         }
     }
-    
+
     // let's start it up!
     NSError *error = [self.detector start];
-    
+
     if (nil != error)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Detector Error" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        [alert show];
-        
+        [self showAlertWithTitle:@"Detector Error" message:[error localizedDescription]];
+
         return;
     }
-    
+
 #ifdef BROADCAST_VIA_UDP
     dispatch_queue_t q = dispatch_queue_create("udp", 0);
     self.udpSocket = [[GCDAsyncUdpSocket alloc] initWithSocketQueue:q];
@@ -1198,9 +1193,9 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 {
     NSUInteger result;
-    
+
     result = UIInterfaceOrientationMaskAll;
-    
+
     return result;
 }
 
@@ -1217,3 +1212,4 @@
 }
 
 @end
+

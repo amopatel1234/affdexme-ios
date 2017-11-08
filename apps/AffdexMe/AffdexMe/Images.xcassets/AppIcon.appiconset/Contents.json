@@ -1,106 +1,112 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
-      "filename" : "AffdexMe_Logo_40x40.png",
+      "idiom" : "iphone",
+      "filename" : "logo_social-20@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
-      "filename" : "AffdexMe_Logo_60x60.png",
+      "idiom" : "iphone",
+      "filename" : "logo_social-20@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_58x58.png",
+      "filename" : "logo_social-Small@2x copy.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_87x87.png",
+      "filename" : "logo_social-Small@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_80x80.png",
+      "filename" : "logo_social-Small-40@2x copy.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_120x120.png",
+      "filename" : "logo_social-Small-40@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_120x120.png",
+      "filename" : "logo_social-60@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AffdexMe_Logo_180x180.png",
+      "filename" : "logo_social-60@3x.png",
       "scale" : "3x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
-      "filename" : "AffdexMe_Logo_20x20.png",
+      "idiom" : "ipad",
+      "filename" : "logo_social-20.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
-      "filename" : "AffdexMe_Logo_40x40.png",
+      "idiom" : "ipad",
+      "filename" : "logo_social-20@2x copy.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_29x29.png",
+      "filename" : "logo_social-Small.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_58x58.png",
+      "filename" : "logo_social-Small@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_40x40.png",
+      "filename" : "logo_social-Small-40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_80x80.png",
+      "filename" : "logo_social-Small-40@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_76x76.png",
+      "filename" : "logo_social-76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_152x152.png",
+      "filename" : "logo_social-76@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "AffdexMe_Logo_167x167.png",
+      "filename" : "logo_social-83.5@2x.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "logo_social-iTunesArtwork@2x.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

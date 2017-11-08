@@ -1,0 +1,2 @@
+binary "https://download.affectiva.com/apple/ios/AffdexSDK.json" "4.0.1"
+github "aws/aws-sdk-ios" "2.6.5"
