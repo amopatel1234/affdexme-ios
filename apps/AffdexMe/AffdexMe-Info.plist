@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.2.1</string>
+	<string>4.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3796</string>
+	<string>3858</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -34,6 +34,8 @@
 		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
+	<string>Emotion AI</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Emotion AI</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Emotion AI</string>

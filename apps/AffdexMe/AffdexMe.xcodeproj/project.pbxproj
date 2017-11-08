@@ -385,7 +385,7 @@
 				65920A6D16D73F8700D89A4B /* Resources */,
 				68914F3B1A8F8F9500A6C4D7 /* Embed Frameworks */,
 				68F198BA18B642BF00621FBA /* ShellScript */,
-				68F55D171F85D0D0001D2845 /* ShellScript */,
+				68F55D171F85D0D0001D2845 /* Carthage copy-framework  */,
 			);
 			buildRules = (
 			);
@@ -501,18 +501,25 @@
 			shellPath = /bin/sh;
 			shellScript = "set -x\nbuildPlist=${INFOPLIST_FILE}\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$buildPlist\")\nCFBundleVersionINCR=$((CFBundleVersion + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionINCR\" \"$buildPlist\"\n";
 		};
-		68F55D171F85D0D0001D2845 /* ShellScript */ = {
+		68F55D171F85D0D0001D2845 /* Carthage copy-framework  */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Affdex.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AWSCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AWSKinesis.framework",
 			);
+			name = "Carthage copy-framework ";
 			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Affdex.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AWSCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AWSKinesis.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"\n";
+			shellScript = "carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -631,7 +638,7 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -647,6 +654,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "AffdexMe-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = /private/tmp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.affectiva.$(PRODUCT_NAME:rfc1034identifier)";
@@ -683,6 +691,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "AffdexMe-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = /private/tmp;
 				ONLY_ACTIVE_ARCH = NO;
